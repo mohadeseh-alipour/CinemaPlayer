@@ -214,6 +214,8 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onCloseMovie();
   }
 
+  //At the begining, useEffect run exactly once, when the component mount.
+  // Then, with dependency it will re-execute when the dependency change or update.
   useEffect(() => {
     async function getMovieDetails() {
       setIsLoading(true);
@@ -226,6 +228,13 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     }
     getMovieDetails();
   }, [selectedId]);
+
+  // run exactly once, when the component mount
+  useEffect(() => {
+    if (!title) return;
+    document.title = `movie | ${title}`;
+  }, [title]);
+
   return (
     <div className="details">
       {isLoading ? (
