@@ -60,7 +60,11 @@ export default function App() {
       setError("");
       return;
     }
+    handleCloseMovie();
     fetchMovies();
+    return function () {
+      controller.abort();
+    };
   }, [query]);
 
   return (
@@ -219,6 +223,20 @@ function MovieDetails({ selectedId, onCloseMovie, onAddWatched, watched }) {
     onAddWatched(newWatchedMovie);
     onCloseMovie();
   }
+
+  useEffect(() => {
+    function callback(e) {
+      if (e.code === "Escape") {
+        onCloseMovie();
+      }
+    }
+    document.addEventListener("keydown", callback);
+
+    // when the component unmount, we will remove old event listeners from Dom
+    return function () {
+      document.removeEventListener("keydown", callback);
+    };
+  }, [onCloseMovie]);
 
   //At the begining, useEffect run exactly once, when the component mount.
   // Then, with dependency it will re-execute when the dependency change or update.
