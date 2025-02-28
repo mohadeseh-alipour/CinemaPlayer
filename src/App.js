@@ -382,7 +382,7 @@ function WatchedMovie({ movie, onDeleteWatched }) {
           onClick={() => onDeleteWatched(movie.imdbID)}
           className="btn-delete"
         >
-          ❌
+          X
         </button>
       </div>
     </li>
