@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-      - mohadeseh-alipour-patch-1
+
   pull_request:
     branches:
       - main
@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - name: Checkout repository
